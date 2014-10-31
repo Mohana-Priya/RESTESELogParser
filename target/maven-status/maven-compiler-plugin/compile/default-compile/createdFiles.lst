@@ -1,8 +1,5 @@
-com\oraclecorp\ese\dto\SiteStatus.class
-com\oraclecorp\ese\util\CommandExecutor.class
-com\oraclecorp\ese\util\DataCon.class
 com\oraclecorp\ese\dto\Event.class
-com\oraclecorp\ese\dto\FailedLabel.class
+com\oraclecorp\ese\util\CommandExecutor.class
 com\oraclecorp\ese\controller\LabelProductReportController.class
+com\oraclecorp\ese\util\DataCon.class
 com\oraclecorp\ese\dto\ExtjsEvent.class
-com\oraclecorp\ese\dto\Label.class

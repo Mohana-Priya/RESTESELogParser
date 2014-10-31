@@ -9,23 +9,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 /**
  * @author mattulur
+ * 
+ * Event DTO which can be mapped to each line JSON in log files
  *
  */
 @XmlRootElement(name="UIEvent")
 @XmlAccessorType(XmlAccessType.NONE)
 public class Event {
-    public static final String AGENT_NAME = "SEI.CORE.EVENT.AGENT_NAME";
-    public static final String AGENT_VERSION = "SEI.CORE.EVENT.AGENT_VERSION";
-    public static final String EVENT_TYPE = "SEI.CORE.EVENT.EVENT_TYPE";
-    public static final String HOST_NAME = "SEI.CORE.EVENT.HOST_NAME";
-    public static final String IP_ADDRESS = "SEI.CORE.EVENT.IP_ADDRESS";
-    public static final String OS_ARCHITECTURE = "SEI.CORE.EVENT.OS_ARCHITECTURE";
-    public static final String OS_NAME = "SEI.CORE.EVENT.OS_NAME";
-    public static final String OS_VERSION = "SEI.CORE.EVENT.OS_VERSION";
-    // Event Constants
-    public static final String TIME = "SEI.CORE.EVENT.TIME";
-    public static final String USER_NAME = "SEI.CORE.EVENT.USER_NAME";
-    
+        
     @XmlElement(name="time")
     private Timestamp time;
     

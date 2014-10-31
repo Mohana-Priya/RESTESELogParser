@@ -2,17 +2,19 @@ package com.oraclecorp.ese.dto;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 /**
  * @author mattulur
  *
+ *This is an optimized version of Event.java
+ *This DTO contains only the fields that are displayed in UI.
  */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement(name="ExtjsEvent")
 @XmlAccessorType(XmlAccessType.NONE)

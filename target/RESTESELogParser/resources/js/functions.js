@@ -77,7 +77,8 @@ function showErrorStack(errorStack){
 	        xtype     : 'textareafield',
 	        readOnly  : true,
 	        height    : 238,
-	        value	  : errorStack
+	        id		  : 'errorStackTAField',
+	        value	  : errorStack.split("\\n").join("\n")
 	    }],
 		fbar : ['->', {
 			xtype : 'button',
@@ -129,7 +130,7 @@ function loadCurrentDateTime(req) {
 				id:'centerSearchPanel',
 				items: [{ 
 					xtype: 'combo',
-			        flex:2,
+			        width:190,
 			        labelWidth:80,
 			        id:'reportTypeCombo',
 			        fieldLabel: 'Report Type',
@@ -138,20 +139,20 @@ function loadCurrentDateTime(req) {
 			        displayField: 'reporType',
 			        valueField: 'reporType',
 			        labelAlign:'right',
-			        value:'Time Range',
+			        value:'Date Range',
 			        listeners:{
 			            scope: this,
 			           'select': function(){
 			        	   if(Ext.getCmp('reportTypeCombo').getValue()=='Date Range'){
-			        		   Ext.getCmp('from_hr').disable();
-			        		   Ext.getCmp('to_hr').disable();
-			        		   Ext.getCmp('from_date').enable();
-			        		   Ext.getCmp('to_date').enable();
+			        		   Ext.getCmp('from_hr').hide();
+			        		   Ext.getCmp('to_hr').hide();
+			        		   Ext.getCmp('from_date').show();
+			        		   Ext.getCmp('to_date').show();
 			        	   }else {
-			        		   Ext.getCmp('from_hr').enable();
-			        		   Ext.getCmp('to_hr').enable();
-			        		   Ext.getCmp('from_date').disable();
-			        		   Ext.getCmp('to_date').disable();
+			        		   Ext.getCmp('from_hr').show();
+			        		   Ext.getCmp('to_hr').show();
+			        		   Ext.getCmp('from_date').hide();
+			        		   Ext.getCmp('to_date').hide();
 			        	   }
 			           }
 			       }
@@ -160,47 +161,47 @@ function loadCurrentDateTime(req) {
 			        fieldLabel: 'From',
 			        id: 'from_date',
 			        format: 'd-m-Y',
-			        flex:2,
-			        disabled:true,
+			        width:150,			        
 			        labelWidth:40,
 			        labelAlign:'right',
-			        value: new Date(currentDate-86400000),
-			        maxValue: new Date(currentDate-86400000)
+			        value: new Date(currentDate),
+			        maxValue: new Date(currentDate)
 				},{ 
 					xtype: 'datefield',
 			        fieldLabel: 'To',
-			        id: 'to_date',
-			        disabled:true,
-			        value: new Date(currentDate-86400000),
+			        id: 'to_date',			        
+			        value: new Date(currentDate),
 			        format: 'd-m-Y',
 			        labelAlign:'right',
-			        flex:2,
+			        width:150,
 			        labelWidth:40,
-			        maxValue: new Date(currentDate-86400000)
+			        maxValue: new Date(currentDate)
 				},{
 			        xtype: 'numberfield',
 			        id: 'from_hr',
-			        flex:2,
-			        labelWidth:50,			        
+			        width:100,
+			        hidden:true,
+			        labelWidth:40,  
 			        labelAlign:'right',
-			        fieldLabel: 'From Hr',
+			        fieldLabel: 'From',
 			        value: 0,
 			        maxValue: currentHour,
 			        minValue: 0
 			    },{
 			        xtype: 'numberfield',
-			        id: 'to_hr',			        
-			        flex:2,
-			        labelWidth:50,
+			        id: 'to_hr',
+			        hidden:true,
+			        width:100,
+			        labelWidth:40,
 			        labelAlign:'right',
-			        fieldLabel: 'To Hr',
+			        fieldLabel: 'To',
 			        value: currentHour,
 			        maxValue: currentHour,
 			        minValue: 0
 			    },{ 
 					xtype: 'button',
-			        margins:'10 0 0 5',
-			        width:40,
+			        margins:'10 0 0 20',
+			        width:35,
 			        text: 'Go',
 			        handler: function(){
 			        	if(isRequestValid()){
@@ -220,9 +221,11 @@ function loadCurrentDateTime(req) {
 		            emptyText: '<center><b><br><br>No matches found for the search criteria..!</center>' 
 		        },
 				columns: [	        
-				    { header: 'Label', dataIndex: 'eventData', flex: 3,renderer:function(value){return value.VIEW_LABEL;}},		            
-				    { header: 'Host Name', dataIndex: 'hostName', flex: 2},
+				    { header: 'Label', dataIndex: 'eventData', flex: 4.5,renderer:function(value){return value.VIEW_LABEL;}},		            
+				    { header: 'Host Name', dataIndex: 'hostName', flex: 1.5,renderer:function(value){return value.split('.')[0];}},
 				    { header: 'Agent Version', dataIndex: 'agentVersion', flex: 4},
+				    { header: 'Start Time', dataIndex: 'eventData', flex: 2,renderer:function(value){return value.START_TIME;}},
+				    { header: 'End Time', dataIndex: 'eventData', flex: 2,renderer:function(value){return value.END_TIME;}},
 				    {
 						xtype:'actioncolumn',
 						header: 'Error Stack',

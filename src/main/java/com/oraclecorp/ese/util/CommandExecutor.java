@@ -2,12 +2,9 @@ package com.oraclecorp.ese.util;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
-
 import org.codehaus.jackson.map.ObjectMapper;
-
 import com.oraclecorp.ese.dto.ExtjsEvent;
 
 public class CommandExecutor {
@@ -15,14 +12,14 @@ public class CommandExecutor {
 		System.out.println("Executing cmd:--> "+cmd);
 		ObjectMapper mapper = new ObjectMapper();
 		Process p;
-		if(cmd.contains("|")){
-			FileWriter fw = new FileWriter("/net/adc6140270/scratch/mattulur/IFarmMonitor/testscript.sh", false);
-			fw.write(cmd);
-			fw.close();
-			p = Runtime.getRuntime().exec("/net/adc6140270/scratch/mattulur/IFarmMonitor/testscript.sh");
-		} else {
-			p = Runtime.getRuntime().exec(cmd);
-		}
+		
+		/*
+		 * If the unix cmd contains | we can not directly run hence writing cmd to file first and then executing that file*/
+		FileWriter fw = new FileWriter("/net/adc6140270/scratch/mattulur/IFarmMonitor/testscript.sh", false);
+		fw.write(cmd);
+		fw.close();
+		p = Runtime.getRuntime().exec("/net/adc6140270/scratch/mattulur/IFarmMonitor/testscript.sh");
+		
 		
         BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
         BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
@@ -43,15 +40,12 @@ public class CommandExecutor {
 		System.out.println("Executing cmd:--> "+cmd);
 		ObjectMapper mapper = new ObjectMapper();
 		Process p;
-		if(cmd.contains("|")){
-			FileWriter fw = new FileWriter("/net/adc6140270/scratch/mattulur/IFarmMonitor/testscript.sh", false);
-			fw.write(cmd);
-			fw.close();
-			p = Runtime.getRuntime().exec("/net/adc6140270/scratch/mattulur/IFarmMonitor/testscript.sh");
-		} else {
-			p = Runtime.getRuntime().exec(cmd);
-		}
 		
+		FileWriter fw = new FileWriter("/net/adc6140270/scratch/mattulur/IFarmMonitor/testscript.sh", false);
+		fw.write(cmd);
+		fw.close();
+		p = Runtime.getRuntime().exec("/net/adc6140270/scratch/mattulur/IFarmMonitor/testscript.sh");
+				
         BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
         BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
         String s;        
